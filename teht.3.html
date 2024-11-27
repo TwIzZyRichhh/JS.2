@@ -2,9 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Names</title>
 </head>
 <body>
-$END$
+  <h1>Dog Names</h1>
+  <button onclick="collectDogNames()">Enter Dog Names</button>
+  <ul id="dog-list"></ul>
+
+  <script>
+    function collectDogNames() {
+      let dogNames = [];
+
+      // Collect six dog names
+      for (let i = 0; i < 6; i++) {
+        let name = prompt(`Enter the name of dog ${i + 1}:`);
+        if (name) {
+          dogNames.push(name.trim());
+        }
+      }
+
+      // Sort the names in reverse alphabetical order
+      dogNames.sort().reverse();
+
+      // Display the names in an unordered list
+      const dogList = document.getElementById('dog-list');
+      dogList.innerHTML = ''; // Clear the list before populating
+      dogNames.forEach((name) => {
+        const li = document.createElement('li');
+        li.textContent = name;
+        dogList.appendChild(li);
+      });
+    }
+  </script>
 </body>
 </html>

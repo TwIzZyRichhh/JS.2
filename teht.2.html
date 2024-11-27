@@ -2,9 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Participants List</title>
 </head>
 <body>
-$END$
+  <h1>Participants</h1>
+  <form id="participants-form">
+    <label for="numParticipants">Enter the number of participants:</label>
+    <input type="number" id="numParticipants" min="1" required>
+    <button type="button" onclick="collectNames()">Submit</button>
+  </form>
+  <ol id="participants-list"></ol>
+
+  <script>
+    function collectNames() {
+      const numParticipants = parseInt(document.getElementById('numParticipants').value);
+
+      if (isNaN(numParticipants) || numParticipants < 1) {
+        alert('Please enter a valid number of participants.');
+        return;
+      }
+
+      let participants = [];
+      for (let i = 0; i < numParticipants; i++) {
+        let name = prompt(`Enter the name of participant ${i + 1}:`);
+        if (name) {
+          participants.push(name.trim());
+        }
+      }
+
+      // Sort participants alphabetically
+      participants.sort();
+
+      // Display the names in an ordered list
+      const participantsList = document.getElementById('participants-list');
+      participantsList.innerHTML = ''; // Clear the list before populating
+      participants.forEach((name) => {
+        const li = document.createElement('li');
+        li.textContent = name;
+        participantsList.appendChild(li);
+      });
+    }
+  </script>
 </body>
 </html>
